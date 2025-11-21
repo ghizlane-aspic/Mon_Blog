@@ -2,14 +2,15 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="style.css" />
     <title><?= $titre ?></title> <!-- Élément spécifique -->
   </head>
   <body>
     <div id="global">
       <header>
-        <a href="index.php"><h1 id="titreBlog">Mon Blog</h1></a>
-<p>Je vous souhaite la bienvenue sur ce modeste blog.</p>
+        <h1 id="titreBlog"><a href="index.php">Mon Blog</a></h1>
+        <p>Je vous souhaite la bienvenue sur ce modeste blog.</p>
       </header>
       <div id="contenu">
           <?= $contenu ?> <!-- Élément spécifique -->

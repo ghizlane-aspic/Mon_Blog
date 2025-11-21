@@ -12,7 +12,6 @@ $titre = 'Mon Blog';
         </header>
         <p><?= $billet['contenu'] ?></p>
     </article>
-    <hr />
 <?php endforeach; ?>
 
 <?php 
