@@ -1,43 +1,148 @@
-/* Pour pouvoir utiliser une hauteur (height) ou une hauteur minimale
-   (min-height) sur un bloc, il faut que son parent direct ait lui-même une
-   hauteur déterminée (donc toute valeur de height sauf "auto": hauteur en
-   pixels, em, autres unités...).
-   Si la hauteur du parent est en pourcentage, elle se réfère alors à la
-   hauteur du «grand-père», et ainsi de suite.
-   Pour pouvoir utiliser un "min-height: 100%" sur div#global, il nous faut:
-   - un parent (body) en "height: 100%";
-   - le parent de body également en "height: 100%". */
-html, body {
-    height: 100%;
+/*
+  Mon Blog – Editorial Elegant Theme (alternative)
+  - Mise en page centrée et sobre, style éditorial
+  - Contraste élevé, serif pour les titres, sans-serif pour le texte
+  - Espacements réguliers, bords arrondis, ombres légères
+*/
+
+:root {
+  /* Couleurs */
+  --bg: #fafaf8;              /* fond légèrement chaleureux */
+  --surface: #ffffff;          /* cartes et en-tête */
+  --text: #111827;             /* gray-900 */
+  --muted: #6b7280;            /* gray-500 */
+  --border: #e5e7eb;           /* gray-200 */
+  --accent: #8b5cf6;           /* violet-500 */
+  --accent-strong: #7c3aed;    /* violet-600 */
+
+  /* Typo */
+  --font-sans: "Source Sans 3", "Inter", "Roboto", "Open Sans", ui-sans-serif, system-ui,
+               -apple-system, "Segoe UI", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  --font-serif: Georgia, Cambria, "Times New Roman", Times, serif;
+  --fs-xxl: clamp(1.9rem, 1.35rem + 2.2vw, 2.8rem);
+  --fs-xl: clamp(1.35rem, 1.1rem + 1vw, 1.85rem);
+  --fs-lg: 1.125rem;
+  --fs-md: 1rem;
+  --fs-sm: 0.9375rem;
+
+  /* Rondeurs, ombres, espaces */
+  --radius: 18px;
+  --radius-sm: 12px;
+  --shadow: 0 10px 28px rgba(17, 24, 39, 0.08);
+
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-7: 32px;
+  --sp-8: 40px;
+
+  /* Container */
+  --container: 1060px;
 }
 
+/* Base */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+html { -webkit-text-size-adjust: 100%; }
 body {
-    color: #bfbfbf;
-    background: black;
-    font-family: 'Futura-Medium', 'Futura', 'Trebuchet MS', sans-serif;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-md);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+img, svg, video { max-width: 100%; height: auto; }
 
-h1 {
-    color: white;
+/* Titres & texte */
+ h1, h2, h3 { margin: 0; line-height: 1.2; letter-spacing: -0.015em; }
+ h1 { font-family: var(--font-serif); font-size: var(--fs-xxl); font-weight: 700; }
+ h2 { font-family: var(--font-serif); font-size: var(--fs-xl); font-weight: 700; }
+ h3 { font-size: var(--fs-lg); font-weight: 600; }
+ p  { margin: 0; }
+
+/* Liens */
+a { color: var(--accent); text-decoration: none; text-underline-offset: 3px; transition: color 160ms ease, box-shadow 160ms ease; }
+a:hover { color: var(--accent-strong); }
+:where(a, button, [role="button"]):focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.35); border-radius: 8px; }
+
+/* Layout */
+#global { max-width: var(--container); margin: var(--sp-8) auto; padding: 0 var(--sp-6); }
+
+/* Header (hero sobre) */
+#global > header {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: var(--sp-7);
+  margin-bottom: var(--sp-7);
+  text-align: center;
 }
-
-.titreBillet {
-    margin-bottom : 0px;
+#titreBlog { margin-bottom: var(--sp-2); }
+#titreBlog a { color: inherit; text-decoration: none; }
+/* Barre d'accent élégante sous le titre */
+#titreBlog::after {
+  content: "";
+  display: block;
+  width: 72px;
+  height: 4px;
+  margin: var(--sp-3) auto 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-strong));
 }
+#global > header p { color: var(--muted); font-size: var(--fs-lg); margin-top: var(--sp-2); }
 
-#global {
-    min-height: 100%;  /* Voir commentaire sur html et body plus haut */
-    background: #333534;
-    width: 70%;
-    margin: auto;	/* Permet de centrer la div */
-    text-align: justify;
-    padding: 5px 20px;
+/* Contenu principal */
+#contenu { display: grid; gap: var(--sp-7); margin-bottom: var(--sp-8); }
+
+/* Cartes d'articles – plus éditoriales (bordure nette, ombre douce) */
+article {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+  padding: var(--sp-6);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 160ms ease;
 }
-
-#contenu {
-    margin-bottom : 30px;
+article:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 42px rgba(17, 24, 39, 0.12);
+  border-color: rgba(139, 92, 246, 0.35);
 }
+article header { margin-bottom: var(--sp-3); }
+.titreBillet { margin-bottom: var(--sp-2); color: var(--text); }
+article time {
+  display: inline-block;
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+article p { color: var(--text); font-size: var(--fs-md); }
 
-#titreBlog, #piedBlog {
-    text-align: center;
+/* Séparateur éventuel (si utilisé ailleurs) */
+hr { border: none; height: 1px; background: var(--border); margin: var(--sp-3) 0; }
+
+/* Footer */
+#piedBlog { color: var(--muted); font-size: var(--fs-sm); text-align: center; padding: var(--sp-5); border-top: 1px solid var(--border); }
+
+/* Utilitaires */
+.text-center { text-align: center; }
+.muted { color: var(--muted); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  #global { padding: 0 var(--sp-5); margin: var(--sp-6) auto; }
+  #global > header { padding: var(--sp-6); }
+}
+@media (max-width: 480px) {
+  #global { padding: 0 var(--sp-4); }
+  #global > header { padding: var(--sp-5); }
+  article { padding: var(--sp-5); }
 }
