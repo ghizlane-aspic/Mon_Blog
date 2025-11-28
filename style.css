@@ -146,3 +146,6 @@ hr { border: none; height: 1px; background: var(--border); margin: var(--sp-3) 0
   #global > header { padding: var(--sp-5); }
   article { padding: var(--sp-5); }
 }
+#titreReponses {
+font-size : 100%;
+}
