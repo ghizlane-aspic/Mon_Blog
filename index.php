@@ -1,5 +1,5 @@
 <?php
-require('Controleur.php');
+require __DIR__ . '/Controleur/Controleur.php';
 
 try {
     if (isset($_GET['action'])) {
